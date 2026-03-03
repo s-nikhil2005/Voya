@@ -1,4 +1,4 @@
-oya – MERN Travel Booking Platform
+Voya – MERN Travel Booking Platform
 
 Voya is a full-stack travel booking web application built using the MERN stack.
 Users can explore destinations, book flights and hotels, add multiple travellers per booking, and complete secure payments.
