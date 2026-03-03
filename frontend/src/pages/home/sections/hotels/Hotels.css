@@ -1,0 +1,50 @@
+.hotels-container {
+  padding: 120px 20px;
+  background: #ffffff; /* clean luxury white */
+  text-align: center;
+  color: #0b1430;
+}
+
+.hotels-header h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #0b1430;
+}
+
+.hotels-header p {
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.hotels-map {
+  width: 85%;
+  max-width: 1200px;
+  height: 650px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e5e5;
+}
+
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+.popup-card img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.popup-card h4 {
+  margin: 0;
+  font-weight: 600;
+  color: #111;
+}

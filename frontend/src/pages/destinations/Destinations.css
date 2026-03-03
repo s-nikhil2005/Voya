@@ -1,0 +1,116 @@
+/* ================= MAIN CONTAINER ================= */
+
+.destinations-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 40px 80px;
+  background: linear-gradient(to bottom, #f8fafc, #eef2f7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ================= HERO ================= */
+
+.destinations-hero {
+  max-width: 900px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.destinations-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.destinations-hero p {
+  font-size: 17px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.destinations-search {
+  display: flex;
+  justify-content: center;
+}
+
+/* ================= GRID ================= */
+
+.destinations-grid {
+  width: 100%;
+  max-width: 1400px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+/* ================= SKELETON ================= */
+
+.placecard-skeleton {
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 25%,
+    #f3f4f6 50%,
+    #e5e7eb 75%
+  );
+
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ================= FADE ANIMATION ================= */
+
+.fade-in {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= NO RESULTS ================= */
+
+.no-results {
+  font-size: 18px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .destinations-container {
+    padding: 100px 20px 60px;
+  }
+
+  .destinations-hero h1 {
+    font-size: 30px;
+  }
+
+  .destinations-grid {
+    gap: 25px;
+  }
+}

@@ -1,0 +1,20 @@
+/* ============================= */
+/* Global Section Wrapper Style  */
+/* ============================= */
+
+.section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  scroll-margin-top: 90px; /* Important for fixed navbar */
+}
+
+/* Optional: spacing control */
+.aboutus-section,
+.hotels-section,
+.flights-section,
+.holidays-section,
+.contactus-section {
+  position: relative;
+  z-index: 1;
+}

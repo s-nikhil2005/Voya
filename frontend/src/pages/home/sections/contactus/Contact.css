@@ -1,0 +1,220 @@
+/* Contact.css */
+
+.contact-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px; /* Adjusted gap */
+  padding-bottom: 80px; /* Added padding to bottom */
+  position: relative; /* Needed for banner positioning */
+  overflow: hidden; /* Ensures no content spills */
+  min-height: 100vh; /* Make sure it takes at least full viewport height */
+  background: radial-gradient(ellipse at bottom, #0d123b 0%, #080a1d 100%); /* Darker base background */
+}
+
+.contact-banner {
+  width: 100vw;
+  height: 450px; /* Slightly taller banner */
+  background-image: url("../../../../assets/images/home/mountain.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  filter: brightness(0.7) contrast(1.1); /* Darken and add contrast */
+  position: absolute; /* Position relative to .contact-container */
+  top: 0;
+  left: 0;
+  z-index: 0; /* Behind other content */
+}
+
+/* Adds a subtle dark overlay to the banner for better text readability */
+.contact-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
+  z-index: 1;
+}
+
+
+.contact-container-header {
+  max-width: 868px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 25px; /* Adjusted gap */
+  z-index: 2; /* Bring header above banner */
+  padding: 0 20px;
+  margin-top: 50px; /* Adjust based on desired overlap with banner */
+  color: #f0f0f0; /* Set text color */
+}
+
+.contact-container-header > span:nth-child(1) {
+  font-weight: 700; /* Bold */
+  font-size: 3.5rem; /* Larger font size */
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 15px rgba(0, 199, 254, 0.4); /* Subtle glow */
+}
+
+.contact-container-header > span:nth-child(2) {
+  font-size: 1.1rem; /* Slightly larger text */
+  color: #c5cae9;
+  line-height: 1.6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between form elements */
+  align-items: center;
+  width: 90vw;
+  max-width: 800px; /* Max width for the form container */
+  padding: 40px; /* More padding inside the form box */
+  
+  /* Frosted Glass Effect for the form box */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  z-index: 2; /* Ensure form is above banner */
+}
+
+.contact-form__flex {
+  display: flex;
+  gap: 20px; /* Gap between email and mobile inputs */
+  width: 100%;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.contact-form__inputGroup {
+  flex: 1; /* Allow inputs to take equal space */
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icon and input */
+  padding: 12px 18px; /* Padding for the input container */
+  background: rgba(255, 255, 255, 0.05); /* Slightly darker background for input group */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contact-form__inputGroup:focus-within {
+  border-color: #00c6fe; /* Highlight border on focus */
+  box-shadow: 0 0 15px rgba(0, 199, 254, 0.5); /* Glowing effect on focus */
+}
+
+.contact-form__icon {
+  color: #00e3fe; /* Cyan color for icons */
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.contact-form__inputGroup:focus-within .contact-form__icon {
+  color: #ffffff; /* White icon on focus */
+}
+
+.contact-form__input {
+  flex-grow: 1; /* Input takes up remaining space */
+  padding: 8px 0; /* Padding inside the input */
+  border: none;
+  background: transparent; /* Transparent background for input */
+  color: #ffffff; /* White text color */
+  font-size: 17px;
+  outline: none; /* Remove default outline */
+  caret-color: #00e3fe; /* Cyan cursor */
+}
+
+.contact-form__input::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Lighter placeholder color */
+}
+
+.contact-form__textareaGroup {
+  align-items: flex-start; /* Align icon to top for textarea */
+  padding-top: 18px; /* Adjust padding for textarea */
+  min-height: 150px; /* Minimum height for textarea group */
+}
+
+.contact-form__textareaIcon {
+  margin-top: 5px; /* Adjust icon position for textarea */
+}
+
+.contact-form__textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 100px; /* Minimum height for textarea */
+  font-family: inherit; /* Inherit font from body */
+}
+
+
+.contact-sendBtn {
+  background-image: linear-gradient(90deg, #00adfd 0, #00c6fe 51%, #00e3fe);
+  border-radius: 40px;
+  color: #fff;
+  width: 180px; /* Wider button */
+  padding: 16px 0px; /* Taller button */
+  border: none;
+  font-weight: bold;
+  font-size: 19px; /* Larger font */
+  margin-top: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0, 199, 254, 0.3); /* Initial subtle glow */
+  transition: all 0.3s ease;
+}
+
+.contact-sendBtn:hover {
+  transform: translateY(-5px) scale(1.05); /* Lift and grow slightly */
+  box-shadow: 0 10px 30px rgba(0, 199, 254, 0.6); /* More intense glow on hover */
+  background-image: linear-gradient(90deg, #00c6fe 0, #00e3fe 51%, #00adfd); /* Subtle gradient shift */
+}
+
+
+/* --- Responsive Design --- */
+@media only screen and (max-width: 768px) {
+  .contact-container-header > span:nth-child(1) {
+    font-size: 2.8rem;
+  }
+  .contact-form {
+    padding: 30px 20px;
+    gap: 15px;
+  }
+  .contact-form__flex {
+    flex-direction: column; /* Stack inputs vertically on small screens */
+    gap: 15px;
+  }
+  .contact-sendBtn {
+    width: 160px;
+    padding: 14px 0;
+    font-size: 17px;
+  }
+  .contact-banner {
+    height: 350px; /* Adjust banner height for smaller screens */
+  }
+  .contact-container-header {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .contact-container-header > span:nth-child(1) {
+    font-size: 2.2rem;
+  }
+  .contact-container-header > span:nth-child(2) {
+    font-size: 1rem;
+  }
+  .contact-form {
+    padding: 25px 15px;
+  }
+  .contact-banner {
+    height: 300px;
+  }
+  .contact-container-header {
+    margin-top: 20px;
+  }
+}
