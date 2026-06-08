@@ -1,185 +1,167 @@
-Voya – MERN Travel Booking Platform
+# 🌍 Voya – Full Stack Travel Booking Platform
 
-Voya is a full-stack travel booking web application built using the MERN stack.
-Users can explore destinations, book flights and hotels, add multiple travellers per booking, and complete secure payments.
+Voya is a modern full-stack travel booking application built using the MERN stack. The platform enables users to discover destinations, book flights and hotels, manage multiple travellers within a single booking, and complete secure online payments.
 
-This project demonstrates real-world full-stack architecture including authentication, Redis-based transaction handling, Stripe payment integration, and PDF ticket generation.
+The project was designed to simulate real-world travel booking workflows while implementing production-oriented features such as authentication, Redis caching, payment processing, PDF ticket generation, and email notifications.
 
-🚀 Features
-🧳 Multi-Traveller Booking (1–5 Travellers)
+---
 
-Dynamic traveller form generation
+## 🚀 Live Demo
 
-Individual validation per traveller
+Frontend: [Add Frontend URL]
 
-Backend array-based traveller schema
+Backend API: [Add Backend URL]
 
-Ticket count validation (frontend + backend)
+---
 
-Scalable booking architecture
+## ✨ Key Features
 
-🔐 Authentication & Security
+### 🧳 Multi-Traveller Booking System
 
-JWT-based authentication
+* Add up to 5 travellers per booking
+* Dynamic traveller form generation
+* Individual traveller validation
+* Backend array-based traveller schema
+* Scalable booking architecture for future seat allocation and pricing models
 
-Protected routes (frontend + backend)
+### ✈️ Flight & Hotel Booking
 
-Bcrypt password hashing
+* Browse destinations
+* Select hotels and flights
+* View booking summaries
+* Complete booking workflow
 
-XSS input sanitization
+### 🔐 Authentication & Authorization
 
-Server-side validation using Validator.js
+* JWT-based authentication
+* Protected frontend and backend routes
+* Secure user registration and login
+* Password hashing using Bcrypt
+* OTP verification using Redis
 
-Redis-based OTP verification
+### 💳 Secure Payment Processing
 
-💳 Stripe Payment Integration
+* Stripe payment integration
+* Transaction verification
+* Booking confirmation only after successful payment
+* Secure payment flow
 
-Stripe test mode integration
+### 📄 PDF Ticket Generation
 
-Secure payment processing
+Automatically generates booking confirmation PDFs containing:
 
-Booking saved only after successful payment
+* Traveller information
+* Booking details
+* Flight details
+* Hotel details
+* Payment summary
 
-Transaction ID-based booking confirmation
+### 📧 Email Notifications
 
-📦 Redis-Based Temporary Booking System
+* Automated booking confirmation emails
+* PDF attachment delivery
+* Nodemailer integration
 
-Booking data stored in Redis before payment
+### ⚡ Redis-Based Booking Workflow
 
-15-minute expiration for security
+* Temporary booking storage before payment
+* 15-minute expiration mechanism
+* Prevents incomplete booking persistence
+* Stores only successful bookings in MongoDB
 
-Prevents incomplete booking storage
+### 🎄 Christmas Mode
 
-MongoDB stores only confirmed bookings
+* Optional snowfall animation
+* Seasonal UI enhancement
 
-📄 Booking Confirmation
+---
 
-Automatically generates booking confirmation
+## 🏗️ Tech Stack
 
-PDF generation using PDFKit
+### Frontend
 
-Email sent via Nodemailer
+* React.js
+* React Router
+* Context API
+* Axios
+* React Toastify
+* React Icons
+* Framer Motion
+* React Snowfall
 
-Includes:
+### Backend
 
-Traveller details
-
-Holiday details
-
-Payment breakdown
-
-🎄 Christmas Mode
-
-Optional snowfall animation toggle
-
-Enhances UI during festive season
-
-🏗 Tech Stack
-Frontend
-
-React.js
-
-Context API
-
-React Router
-
-Axios
-
-React Toastify
-
-React Icons
-
-React Snowfall
-
-Backend
-
-Node.js
-
-Express.js
-
-MongoDB + Mongoose
-
-Redis
-
-JWT (JSON Web Token)
-
-Bcrypt
-
-Stripe API
-
-Nodemailer
-
-PDFKit
-
-XSS
-
-Validator.js
-
-🧠 Application Flow
-
-User selects destination, hotel, and flight
-
-User adds 1–5 travellers dynamically
-
-Backend validates all traveller data
-
-Booking temporarily stored in Redis
-
-User completes Stripe payment
-
-On success:
-
-Booking saved in MongoDB
-
-PDF generated
-
-Confirmation email sent
-
-Redis entry removed
-
-📂 Project Structure
-Voya/
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* Redis
+* JWT Authentication
+* Bcrypt
+* Stripe API
+* Nodemailer
+* PDFKit
+* Validator.js
+* XSS Sanitization
+
+---
+
+## 🧠 System Workflow
+
+1. User registers and verifies account using OTP.
+2. User selects destination, hotel, and flight.
+3. User adds travellers (1–5 travellers).
+4. Backend validates traveller information.
+5. Booking data is temporarily stored in Redis.
+6. User completes payment through Stripe.
+7. Payment verification is performed.
+8. Booking is saved in MongoDB.
+9. PDF confirmation is generated.
+10. Confirmation email is sent.
+11. Temporary Redis data is removed.
+
+---
+
+## 📂 Project Structure
+
+```text
+Voya
 │
-├── frontend/     → React Application
-├── backend/      → Express Server
-├── models/       → Mongoose Schemas
-├── controllers/  → Business Logic
-├── config/       → Database & Redis Setup
-└── utils/        → Email, PDF, API Response Helpers
-⚙️ Installation
-Prerequisites
+├── frontend
+│   ├── src
+│   ├── public
+│   └── components
+│
+├── backend
+│   ├── config
+│   ├── controllers
+│   ├── middlewares
+│   ├── models
+│   ├── routes
+│   ├── utils
+│   └── services
+│
+└── README.md
+```
 
-Node.js (v16+)
+## 🔒 Security Features
 
-MongoDB
+* JWT Authentication
+* Password Hashing (Bcrypt)
+* OTP Verification (Redis)
+* Route Protection
+* Input Validation
+* XSS Protection
+* Secure Payment Verification
+* Server-Side Data Validation
 
-Redis Server
+---
 
-Stripe Test Account
+## 📊 Database Design
 
-Clone the Repository
-git clone https://github.com/yourusername/voya.git
-cd voya
-Frontend Setup
-cd frontend
-npm install
-npm start
-Backend Setup
-cd backend
-npm install
-npm start
-🔒 Protected Routes
+### Booking Schema
 
-Booking page
-
-Confirm booking page
-
-Payment page
-
-Backend routes are protected using JWT middleware.
-
-📊 Database Design (Updated)
-Booking Model (Multi-Traveller Support)
+```javascript
 travellers: [
   {
     name: String,
@@ -189,43 +171,85 @@ travellers: [
     address: String
   }
 ]
+```
 
-Supports 1–5 travellers
+Supports multiple travellers within a single booking and allows future expansion for advanced booking functionality.
 
-Validated server-side
+---
 
-Designed for scalability (seat allocation, pricing tiers, etc.)
+## ⚙️ Installation
 
-🛡 Security Measures
+### Clone Repository
 
-Server-side input validation
+```bash
+git clone https://github.com/yourusername/voya.git
+cd voya
+```
 
-XSS sanitization
+### Frontend Setup
 
-Encrypted passwords
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-JWT authentication
+### Backend Setup
 
-Redis-based OTP expiration
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-Payment verification before database storage
+---
 
-📌 Future Improvements
+## 🔑 Environment Variables
 
-Seat selection per traveller
+### Backend
 
-Booking cancellation feature
+```env
+PORT=
+MONGODB_URI=
+SECRET_KEY=
+REDIS_HOST=
+REDIS_PORT=
+REDIS_PASSWORD=
+STRIPE_SECRET_KEY=
+AUTH_MAIL_USER=
+AUTH_MAIL_PASS=
+```
 
-Admin dashboard
+### Frontend
 
-Dynamic pricing (adult/child pricing)
+```env
+VITE_BASE_URL=
+VITE_STRIPE_PUBLISHABLE_KEY=
+```
 
-Payment history dashboard
+---
 
-📜 License
+## 📌 Future Enhancements
+
+* Seat Selection System
+* Booking Cancellation
+* Admin Dashboard
+* Dynamic Pricing Engine
+* Booking History Dashboard
+* User Reviews & Ratings
+* Travel Recommendations
+* CI/CD Pipeline Integration
+
+---
+
+## 👨‍💻 Author
+
+Nikhil Singh
+
+Full Stack Developer | MERN Stack Enthusiast
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License.
-
-👨‍💻 Author
-
-Developed as a full-stack MERN practice project to demonstrate real-world booking system architecture and secure payment integration.
