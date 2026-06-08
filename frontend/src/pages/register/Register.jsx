@@ -2,7 +2,7 @@ import  { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Register.css";
 import InputBox from "../../components/inputbox/InputBox";
-import logo from "../../assets/images/Voyawander.png";
+import logo from "../../assets/images/voyawanderLogo.png";
 import Restriction from "../../utils/Restriction";
 import OtpInput from "../../components/inputbox/OtpInput";
 import { useLoading } from "../../context/LoadingContext";
