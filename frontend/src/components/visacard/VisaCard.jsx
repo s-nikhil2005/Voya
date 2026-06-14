@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./VisaCard.css";
 
 const VisaCard = () => {

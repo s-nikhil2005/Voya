@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import "./HotelCard.css";
 import { IoStarSharp } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import { BookingContext } from "../../context/BookingContext";
 import { UserContext } from "../../context/UserContext";
 
 const HotelCard = ({ hotel }) => {
+    console.log("HOTEL DATA:", hotel);
   const navigate = useNavigate();
   const { updateBooking } = useContext(BookingContext);
   const { user } = useContext(UserContext);
