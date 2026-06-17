@@ -3,7 +3,9 @@ require("dotenv").config();
 const URI = process.env.MONGODB_URI;
 const DB_NAME = "nikhilTravelDB";
 const PORT = process.env.PORT || 8080;
-const allowedOrigins = process.env.CORS_ORIGIN.split(",");
+const allowedOrigins = process.env.CORS_ORIGIN
+  .split(",")
+  .map(origin => origin.trim());
 const SECRET_KEY = process.env.SECRET_KEY;
 const API_ENDPOINT = "api/v1";
 const AUTH_MAIL_USER = process.env.AUTH_MAIL_USER;
