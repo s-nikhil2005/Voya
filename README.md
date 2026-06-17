@@ -8,7 +8,7 @@ The project was designed to simulate real-world travel booking workflows while i
 
 ## 🚀 Live Demo
 
-Frontend: voya-git-main-nikhil-singh-mern.vercel.app
+Frontend: https://voya-git-main-nikhil-singh-mern.vercel.app
 
 Backend API: https://voya-backend-btve.onrender.com
 
