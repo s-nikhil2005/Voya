@@ -1,12 +1,36 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./FlightCard.css";
 import { ImSpoonKnife } from "react-icons/im";
+import { IoAirplane } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import { BookingContext } from "../../context/BookingContext";
 import { UserContext } from "../../context/UserContext";
 
+import airplaneBg from "../../assets/images/home/airplane.webp";
+import travelBg from "../../assets/images/home/travel.webp";
+import mountainBg from "../../assets/images/home/mountain.webp";
+
+const getFlightBackground = (name = "") => {
+  const lower = (name || "").toLowerCase();
+  if (lower.includes("vistara")) return airplaneBg;
+  if (lower.includes("air india")) return airplaneBg;
+  if (lower.includes("singapore")) return travelBg;
+  if (lower.includes("emirates")) return mountainBg;
+  if (lower.includes("indigo")) return airplaneBg;
+  if (lower.includes("spicejet")) return travelBg;
+  if (lower.includes("qatar")) return mountainBg;
+  if (lower.includes("lufthansa")) return mountainBg;
+  if (lower.includes("british")) return airplaneBg;
+  if (lower.includes("etihad")) return travelBg;
+  return airplaneBg;
+};
+
 const FlightCard = ({ flight }) => {
   const navigate = useNavigate();
+  // If logo is missing or from 1000logos.net (which returns 404/hangs for 6s), immediately use fallback badge
+  const isKnownBroken =
+    !flight?.flightLogo || flight.flightLogo.includes("1000logos.net");
+  const [logoError, setLogoError] = useState(isKnownBroken);
 
   const handleBookNow = () => {
     updateBooking({ flight: flight._id });
@@ -16,8 +40,18 @@ const FlightCard = ({ flight }) => {
   const { updateBooking } = useContext(BookingContext);
   const { user } = useContext(UserContext);
 
+  const bgImage = getFlightBackground(flight?.flightName);
+
   return (
-    <div className="flightContianer">
+    <div
+      className="flightContianer"
+      style={{
+        backgroundImage: `linear-gradient(135deg, rgba(21, 31, 61, 0.88) 0%, rgba(26, 39, 76, 0.93) 100%), url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="section1">
         <div className="sectionLeft">
           <button className="deal">DEAL</button>
@@ -31,7 +65,18 @@ const FlightCard = ({ flight }) => {
         <div className="devider1">
           <div className="flightDetails">
             <div className="flightLogo">
-              <img src={flight.flightLogo} alt="logo" />
+              {logoError ? (
+                <div className="flightLogo-fallback" title={flight.flightName}>
+                  <IoAirplane className="flightLogo-fallback-icon" />
+                </div>
+              ) : (
+                <img
+                  src={flight.flightLogo}
+                  alt={flight.flightName || "flight logo"}
+                  decoding="async"
+                  onError={() => setLogoError(true)}
+                />
+              )}
             </div>
             <div className="flightName">
               <p>{flight.flightName}</p>

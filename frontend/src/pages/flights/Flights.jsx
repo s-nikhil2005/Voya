@@ -16,7 +16,6 @@ const Flights = () => {
       <div className="flights-container-header">
         <span>Available Flights...</span>
       </div>
-        console.log(flight.flightLogo);
       <div className="flights-container__parentBox">
         {flights?.length > 0 ? (
           flights?.map((flight) => {

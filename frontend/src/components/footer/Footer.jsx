@@ -20,7 +20,9 @@ const Footer = () => {
       scrollToSection(sectionId);
     } else {
       navigate("/");
-      setTimeout(() => scrollToSection(sectionId), 300);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => scrollToSection(sectionId));
+      });
     }
   };
 

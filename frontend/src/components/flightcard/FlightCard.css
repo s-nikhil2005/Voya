@@ -7,46 +7,52 @@
   align-items: center;
   gap: 40px;
   width: 100%;
-  background-color: rgb(220, 236, 241);
+  background-color: #0b112c;
 }
 .flightContianer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 8px 24px;
   height: 200px;
   width: 100%;
   max-width: 1020px;
-  background-color: white;
+  background-color: #151f3d;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  color: #ffffff;
 }
 .section1 {
   display: flex;
   align-items: center;
   height: 22%;
   width: 100%;
-  border-bottom: 1px solid rgb(195, 195, 195);
-  /* border-top: 1px solid rgb(195, 195, 195); */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   gap: 10px;
 }
 .sectionLeft {
   display: flex;
   align-items: center;
-  background-color: #fde5e5;
+  background-color: rgba(0, 173, 253, 0.08);
   height: 100%;
   width: 90%;
   padding-left: 15px;
   gap: 10px;
+  color: #cbd5e1;
 }
 
 .section2 {
   display: flex;
   align-items: center;
-  align-items: center;
   justify-content: center;
   height: 60%;
   width: 94%;
-  border-bottom: 1px solid rgb(195, 195, 195);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-left: 15px;
   gap: 10px;
 }
@@ -58,6 +64,22 @@
   width: 94%;
   padding-left: 15px;
   gap: 10px;
+  color: #94a3b8;
+}
+
+.section3 select {
+  background-color: #1a274c;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.section3 select option {
+  background-color: #151f3d;
+  color: #ffffff;
 }
 
 /*  Section 1 */
@@ -65,10 +87,11 @@
   height: 30px;
   width: 60px;
   font-size: small;
-  background-color: #22c35e;
+  background-color: #10b981;
   color: white;
   border: none;
   border-radius: 10px;
+  font-weight: 600;
 }
 
 /* Section 2 */
@@ -94,14 +117,34 @@
 }
 .flightLogo > img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.flightLogo-fallback {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00adfd, #0077b6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 173, 253, 0.3);
+}
+.flightLogo-fallback-icon {
+  font-size: 22px;
 }
 .flightName {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
+.flightName :first-child {
+  color: #ffffff;
+  font-weight: 600;
+}
 .flightName :nth-child(2) {
-  color: gray;
+  color: #94a3b8;
   font-size: small;
 }
 
@@ -114,28 +157,32 @@
   width: 80px;
   height: 3px;
   margin: 20px;
-  background-color: rgb(195, 195, 195);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .timeBox :first-child {
   font-weight: bold;
+  color: #ffffff;
 }
 .timeBox :last-child {
   font-size: small;
+  color: #94a3b8;
 }
 
 .devider2 {
   display: flex;
   align-items: center;
   width: 50%;
-  border-left: 2px solid rgb(195, 195, 195);
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
   justify-content: space-between;
   padding: 0 30px 0 30px;
 }
 .totalTime :first-child {
   font-weight: bold;
+  color: #ffffff;
 }
 .totalTime :last-child {
   font-size: small;
+  color: #94a3b8;
 }
 .flightPrice {
   display: flex;
@@ -146,6 +193,7 @@
 .flightPrice :first-child {
   font-weight: bold;
   font-size: 27px;
+  color: #ffffff;
 }
 
 /* Section 3 */
@@ -153,13 +201,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #94a3b8;
 }
 .mealSection {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 10px 0 10px;
-  border-right: 2px solid rgba(107, 106, 106, 0.747);
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  gap: 6px;
 }
 .emissions {
   display: flex;
@@ -169,16 +219,19 @@
 }
 
 .flightBookNowBtn {
-  padding: 10px 15px;
+  padding: 10px 18px;
   border-radius: 10px;
   cursor: pointer;
-  border: 2px solid #c53030;
-  color: #c53030;
-  background-color: white;
+  border: 2px solid #f87171;
+  color: #ffffff;
+  background-color: #dc2626;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 .flightBookNowBtn:hover {
-  background-color: #c53030;
-  color: white;
+  background-color: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
 }
 
 @media only Screen and (max-width: 1020px) {
@@ -196,17 +249,15 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     height: 400px;
-    /* width: 90%; */
   }
   .section2 {
     display: flex;
-
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
     height: 60%;
     width: 94%;
-    border-bottom: 1px solid rgb(195, 195, 195);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 0;
     gap: 40px;
   }
@@ -220,9 +271,8 @@
   .devider2 {
     display: flex;
     align-items: center;
-
     width: 100%;
-    border-left: 2px solid white;
+    border-left: 2px solid transparent;
     justify-content: space-evenly;
     padding: 0px;
   }

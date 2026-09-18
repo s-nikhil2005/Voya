@@ -1,15 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import "./PlaceCard.css";
 import { useNavigate } from "react-router-dom";
 import { BookingContext } from "../../context/BookingContext";
 import { UserContext } from "../../context/UserContext";
 import { API_URL } from "../../constant";
+import { useInView } from "react-intersection-observer";
 
-const PlaceCard = ({ place }) => {
+const PlaceCard = ({ place, priority = false }) => {
   const navigate = useNavigate();
   const { updateBooking } = useContext(BookingContext);
   const { updateUser } = useContext(UserContext);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const { ref, inView } = useInView({
+    rootMargin: "600px 0px",
+    triggerOnce: true,
+  });
+
+  const shouldLoadImage = priority || inView;
 
   const handleClick = () => {
     updateBooking({ place: place._id });
@@ -26,14 +35,24 @@ const PlaceCard = ({ place }) => {
       : `${API_URL.replace("/api/v1", "")}/${place.placeImage}`;
 
   return (
-    <div className="placecard-box">
+    <div ref={ref} className="placecard-box">
       <div className="placecard-image-wrapper">
-        <img
-          src={placeImage}
-          alt={place.placeName}
-          loading="lazy"
-          onError={(e) => (e.target.style.display = "none")}
-        />
+        {/* Shimmer Skeleton Placeholder only while image is loading */}
+        {!imageLoaded && (
+          <div className="placecard-image-skeleton"></div>
+        )}
+
+        {shouldLoadImage && (
+          <img
+            src={placeImage}
+            alt={place.placeName}
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            className={`placecard-img ${imageLoaded ? "placecard-img--loaded" : "placecard-img--loading"}`}
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
+          />
+        )}
       </div>
 
       <div className="placecard-content">
@@ -64,6 +83,7 @@ PlaceCard.propTypes = {
     tripDuration: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
+  priority: PropTypes.bool,
 };
 
 export default PlaceCard;

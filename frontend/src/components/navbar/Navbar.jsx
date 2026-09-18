@@ -39,7 +39,9 @@ const Navbar = () => {
       scrollToSection();
     } else {
       navigate("/");
-      setTimeout(scrollToSection, 300);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(scrollToSection);
+      });
     }
 
     setMenuOpen(false);

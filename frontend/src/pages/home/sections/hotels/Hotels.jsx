@@ -117,6 +117,8 @@ const Hotels = () => {
                       <img
                         src={loc.image}
                         alt={loc.name}
+                        loading="lazy"
+                        decoding="async"
                         onClick={() => {
                           setActiveImage(loc.image);
                           setOpen(true);

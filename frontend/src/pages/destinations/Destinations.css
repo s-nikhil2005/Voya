@@ -39,29 +39,27 @@
 
 .destinations-grid {
   width: 100%;
-  max-width: 1400px;
-
+  max-width: 1440px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
 /* ================= SKELETON ================= */
 
 .placecard-skeleton {
   width: 100%;
-  height: 420px;
+  height: 380px;
   border-radius: 18px;
-
   background: linear-gradient(
     90deg,
-    #e5e7eb 25%,
-    #f3f4f6 50%,
-    #e5e7eb 75%
+    #e2e8f0 25%,
+    #f8fafc 50%,
+    #e2e8f0 75%
   );
-
   background-size: 200% 100%;
   animation: shimmer 1.3s infinite linear;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
 
 @keyframes shimmer {
@@ -76,13 +74,15 @@
 /* ================= FADE ANIMATION ================= */
 
 .fade-in {
-  animation: fadeInUp 0.5s ease forwards;
+  display: flex;
+  height: 100%;
+  animation: fadeInUp 0.4s ease forwards;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -93,6 +93,7 @@
 /* ================= NO RESULTS ================= */
 
 .no-results {
+  grid-column: 1 / -1;
   font-size: 18px;
   color: #6b7280;
   text-align: center;
@@ -101,16 +102,44 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+  .destinations-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
   .destinations-container {
-    padding: 100px 20px 60px;
+    padding: 100px 24px 60px;
   }
 
   .destinations-hero h1 {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .destinations-grid {
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 580px) {
+  .destinations-container {
+    padding: 90px 16px 50px;
+  }
+
+  .destinations-hero h1 {
+    font-size: 28px;
+  }
+
+  .destinations-hero p {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .destinations-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

@@ -1,19 +1,27 @@
-import  { useContext } from "react";
+import { useContext, useState } from "react";
 import "./HotelCard.css";
 import { IoStarSharp } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsCupHotFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom"; // ✅ FIXED
+import { useNavigate } from "react-router-dom";
 import { BookingContext } from "../../context/BookingContext";
 import { UserContext } from "../../context/UserContext";
+import { useInView } from "react-intersection-observer";
 
-const HotelCard = ({ hotel }) => {
-    console.log("HOTEL DATA:", hotel);
+const HotelCard = ({ hotel, priority = false }) => {
   const navigate = useNavigate();
   const { updateBooking } = useContext(BookingContext);
   const { user } = useContext(UserContext);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const { ref, inView } = useInView({
+    rootMargin: "600px 0px",
+    triggerOnce: true,
+  });
 
   if (!hotel) return null;
+
+  const shouldLoadImage = priority || inView;
 
   const handleClick = () => {
     updateBooking({ hotel: hotel._id });
@@ -23,15 +31,23 @@ const HotelCard = ({ hotel }) => {
   const stars = Number(hotel.hotelStars) || 0;
 
   return (
-    <div className="hotelCard-container">
+    <div ref={ref} className="hotelCard-container">
       {/* LEFT IMAGE */}
       <div className="hotelCard-left">
-        <img
-          src={hotel.hotelImage}
-          alt={hotel.hotelName}
-          width="300"
-          height="300"
-        />
+        {!imageLoaded && <div className="hotelCard-left__skeleton" />}
+        {shouldLoadImage && (
+          <img
+            src={hotel.hotelImage}
+            alt={hotel.hotelName}
+            width="300"
+            height="300"
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            style={{ opacity: imageLoaded ? 1 : 0 }}
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
+          />
+        )}
       </div>
 
       {/* MIDDLE */}

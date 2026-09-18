@@ -19,8 +19,14 @@ const Hotels = () => {
 
       <div className="hotels-container__parent">
         {hotels.length > 0 ? (
-          hotels.map((hotel) => {
-            return <HotelCard key={hotel._id} hotel={hotel} />;
+          hotels.map((hotel, index) => {
+            return (
+              <HotelCard
+                key={hotel._id}
+                hotel={hotel}
+                priority={index < 2}
+              />
+            );
           })
         ) : (
           <span className="no-results">No hotels found</span>
