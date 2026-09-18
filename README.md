@@ -6,9 +6,15 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose_8-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Redis](https://img.shields.io/badge/Redis-Cloud_Caching-DC382D?logo=redis&logoColor=white)](https://redis.io/)
 [![Stripe](https://img.shields.io/badge/Stripe-Payment_Intents-008CDD?logo=stripe&logoColor=white)](https://stripe.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Voya is a production-style, full-stack travel booking application built with the MERN stack (MongoDB, Express, React, Node.js) and powered by Redis Cloud and Stripe. The platform provides an end-to-end booking flow: discovering international holiday destinations, filtering boutique hotels, selecting airline flights, staging transient booking sessions in Redis, processing payments through Stripe Elements, and automatically generating and emailing branded PDF tickets.
+
+---
+
+## 🌐 Live Demo
+
+- **Frontend:** https://voya-six-bay.vercel.app/
+- **Backend API:** https://voya-backend-btve.onrender.com/
 
 ---
 
@@ -283,10 +289,4 @@ npm run dev
 * **Customer Dashboard**: Self-service portal to view reservation history and download previous PDF receipts.
 * **Webhook Integration**: Stripe Webhook endpoints (`stripe listen`) as a fail-safe confirmation listener for asynchronous payment events.
 * **Automated CI/CD**: GitHub Actions workflow for linting, test suite execution, and automated container deployment.
-
----
-
-## 📄 License
-
-This project is licensed under the terms of the [MIT License](LICENSE).
 
