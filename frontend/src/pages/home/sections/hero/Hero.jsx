@@ -44,7 +44,9 @@ const Hero = () => {
         <p>
           Curated journeys. Exceptional stays. Seamless luxury experiences.
         </p>
-        <button className="hero-btn">Explore Destinations</button>
+        <a href="#popular-destinations" className="hero-btn">
+            Explore Destinations
+        </a>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ const Holidays = () => {
   const isLoading = !places || places.length === 0;
 
   return (
-    <section className="holidays-container">
+    <section   id="popular-destinations" className="holidays-container">
       <div className="holidays-container-header">
         <h2>Find Popular Destinations</h2>
         <p>

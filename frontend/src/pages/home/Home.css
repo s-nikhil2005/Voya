@@ -18,3 +18,11 @@
   position: relative;
   z-index: 1;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+#popular-destinations {
+  scroll-margin-top: 80px;
+}
