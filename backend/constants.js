@@ -15,6 +15,9 @@ const REDIS_HOST = process.env.REDIS_HOST;
 const REDIS_PORT = process.env.REDIS_PORT;
 const OTP_VALID_TIME = 600; //OTP valid up to "" in seconds
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+const EMAIL_PROVIDER = (process.env.EMAIL_PROVIDER || "v1").toLowerCase();
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
 
 module.exports = {
   URI,
@@ -30,4 +33,7 @@ module.exports = {
   REDIS_PORT,
   OTP_VALID_TIME,
   STRIPE_SECRET_KEY,
+  EMAIL_PROVIDER,
+  RESEND_API_KEY,
+  RESEND_FROM_EMAIL,
 };
