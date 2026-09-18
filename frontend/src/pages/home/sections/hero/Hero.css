@@ -74,6 +74,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .hero-btn:hover {
