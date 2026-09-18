@@ -229,7 +229,10 @@ const saveBookingDetails = async (req, res) => {
     // Save the booking details in the database
     await newBooking.save();
 
-    // Send Email
+    // Send Email (Cap tickets/travellers at max 5)
+    const rawTravellerCount = Number(bookingDetails.payment?.traveller) || 1;
+    const cappedTravellerCount = Math.min(5, Math.max(1, rawTravellerCount));
+
     const data = {
       traveller: {
         "Traveller Name": bookingDetails.traveller.name,
@@ -238,6 +241,7 @@ const saveBookingDetails = async (req, res) => {
         "Aadhar Number": bookingDetails.traveller.adharNumber,
         Address: bookingDetails.traveller.address,
       },
+      ticketCount: cappedTravellerCount,
       holiday: {
         "Holiday Place": bookingDetails.holiday.place,
         Hotel: bookingDetails.holiday.hotel,
@@ -249,7 +253,7 @@ const saveBookingDetails = async (req, res) => {
         "Trip Payment": `$ ${bookingDetails.payment.trip}`,
         "Hotel Payment": `$ ${bookingDetails.payment.hotel}`,
         "Flight Payment": `$ ${bookingDetails.payment.flight}`,
-        "Number of Travellers": `${bookingDetails.payment.traveller}`,
+        "Number of Travellers": `${cappedTravellerCount}`,
         "Total Amount": `$ ${bookingDetails.payment.totalAmount}`,
       },
     };
