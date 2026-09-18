@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { BookingContext } from "../../../../context/BookingContext";
 import { UserContext } from "../../../../context/UserContext";
 import { IoImageOutline } from "react-icons/io5";
+import { getOptimizedImageUrl } from "../../../../utils/imageUtils";
 
 const Holidays = () => {
   const { places } = useContext(DataContext);
@@ -139,11 +140,13 @@ const HolidayCard = ({ place, priority, onBook }) => {
     [checkImageLoaded]
   );
 
+  const holidayImage = getOptimizedImageUrl(place.placeImage, 600, 80);
+
   useEffect(() => {
     if (imgRef.current) {
       checkImageLoaded(imgRef.current);
     }
-  }, [place.placeImage, checkImageLoaded]);
+  }, [holidayImage, checkImageLoaded]);
 
   const handleLoad = () => {
     setImageLoaded(true);
@@ -169,9 +172,10 @@ const HolidayCard = ({ place, priority, onBook }) => {
         )}
         <img
           ref={handleImgRef}
-          src={place.placeImage}
+          src={holidayImage}
           alt={place.placeName}
-          loading="eager"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "low"}
           decoding="async"
           className={`holidays-box__img ${imageLoaded && !hasError ? "holidays-box__img--loaded" : "holidays-box__img--loading"}`}
           onLoad={handleLoad}

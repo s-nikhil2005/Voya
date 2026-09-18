@@ -6,6 +6,7 @@ import { BookingContext } from "../../context/BookingContext";
 import { UserContext } from "../../context/UserContext";
 import { API_URL } from "../../constant";
 import { IoImageOutline } from "react-icons/io5";
+import { getOptimizedImageUrl } from "../../utils/imageUtils";
 
 const PlaceCard = ({ place, priority = false }) => {
   const navigate = useNavigate();
@@ -24,11 +25,12 @@ const PlaceCard = ({ place, priority = false }) => {
     navigate("/hotels");
   };
 
-  // ✅ Clean image handling
-  const placeImage =
+  // ✅ Optimized frontend image URL construction (idempotent, original DB intact)
+  const rawImage =
     place.placeImage?.startsWith("http")
       ? place.placeImage
       : `${API_URL.replace("/api/v1", "")}/${place.placeImage}`;
+  const placeImage = getOptimizedImageUrl(rawImage, 600, 80);
 
   const checkImageLoaded = useCallback((node) => {
     if (!node) return;
@@ -130,7 +132,8 @@ const PlaceCard = ({ place, priority = false }) => {
           ref={handleImgRef}
           src={placeImage}
           alt={place.placeName}
-          loading="eager"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "low"}
           decoding="async"
           className={`placecard-img ${imageLoaded && !hasError ? "placecard-img--loaded" : "placecard-img--loading"}`}
           onLoad={handleLoad}
