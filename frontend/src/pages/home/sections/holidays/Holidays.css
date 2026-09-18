@@ -171,6 +171,39 @@
   position: relative;
 }
 
+.holidays-box__image-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  gap: 8px;
+  padding: 12px;
+  text-align: center;
+  z-index: 2;
+}
+
+.holidays-box__fallback-icon {
+  font-size: 38px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.holidays-box__fallback-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c5cae9;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ============================= */
 /* Text                         */
 /* ============================= */

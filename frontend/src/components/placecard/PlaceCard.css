@@ -150,4 +150,39 @@
 .placecard-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 173, 253, 0.4);
+}
+
+/* IMAGE FALLBACK */
+
+.placecard-image-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  gap: 8px;
+  padding: 12px;
+  text-align: center;
+  z-index: 2;
+}
+
+.placecard-fallback-icon {
+  font-size: 38px;
+  color: #94a3b8;
+}
+
+.placecard-fallback-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

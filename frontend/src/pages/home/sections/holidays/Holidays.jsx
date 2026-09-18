@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useCallback, useEffect } from "react";
 import "./Holidays.css";
 import { DataContext } from "../../../../context/DataContext";
 import { useNavigate } from "react-router";
 import { BookingContext } from "../../../../context/BookingContext";
 import { UserContext } from "../../../../context/UserContext";
-import { useInView } from "react-intersection-observer";
+import { IoImageOutline } from "react-icons/io5";
 
 const Holidays = () => {
   const { places } = useContext(DataContext);
@@ -72,28 +72,112 @@ const Holidays = () => {
 // Subcomponent for individual holiday card with zero layout shift & smooth image loading
 const HolidayCard = ({ place, priority, onBook }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const { ref, inView } = useInView({
-    rootMargin: "600px 0px",
-    triggerOnce: true,
-  });
+  const [hasError, setHasError] = useState(false);
+  const imgRef = useRef(null);
 
-  const shouldLoadImage = priority || inView;
+  const checkImageLoaded = useCallback((node) => {
+    if (!node) return;
+
+    // 1. Instant check: naturalWidth > 0 means image bytes are available
+    if (node.naturalWidth > 0) {
+      setImageLoaded(true);
+      setHasError(false);
+      return;
+    }
+
+    // 2. Check complete flag
+    if (node.complete) {
+      if (node.naturalWidth > 0) {
+        setImageLoaded(true);
+        setHasError(false);
+      } else if (node.src) {
+        setHasError(true);
+        setImageLoaded(true);
+      }
+      return;
+    }
+
+    // 3. Fast decode() check for cached images
+    if (typeof node.decode === "function") {
+      node
+        .decode()
+        .then(() => {
+          if (node.naturalWidth > 0) {
+            setImageLoaded(true);
+            setHasError(false);
+          }
+        })
+        .catch(() => {
+          if (node.complete && node.naturalWidth === 0) {
+            setHasError(true);
+            setImageLoaded(true);
+          }
+        });
+    }
+  }, []);
+
+  const handleImgRef = useCallback(
+    (node) => {
+      imgRef.current = node;
+      if (!node) return;
+
+      checkImageLoaded(node);
+
+      // Also attach native listeners directly to catch events outside React's synthetic lifecycle
+      const onNativeLoad = () => {
+        setImageLoaded(true);
+        setHasError(false);
+      };
+      const onNativeError = () => {
+        setHasError(true);
+        setImageLoaded(true);
+      };
+
+      node.addEventListener("load", onNativeLoad, { once: true });
+      node.addEventListener("error", onNativeError, { once: true });
+    },
+    [checkImageLoaded]
+  );
+
+  useEffect(() => {
+    if (imgRef.current) {
+      checkImageLoaded(imgRef.current);
+    }
+  }, [place.placeImage, checkImageLoaded]);
+
+  const handleLoad = () => {
+    setImageLoaded(true);
+    setHasError(false);
+  };
+
+  const handleError = () => {
+    setHasError(true);
+    setImageLoaded(true);
+  };
 
   return (
-    <div ref={ref} className="holidays-box">
+    <div className="holidays-box">
       <div className="holidays-box__image-wrapper">
-        {!imageLoaded && <div className="holidays-box__image-skeleton" />}
-        {shouldLoadImage && (
-          <img
-            src={place.placeImage}
-            alt={place.placeName}
-            loading={priority ? "eager" : "lazy"}
-            decoding="async"
-            className={`holidays-box__img ${imageLoaded ? "holidays-box__img--loaded" : "holidays-box__img--loading"}`}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(true)}
-          />
+        {!imageLoaded && !hasError && (
+          <div className="holidays-box__image-skeleton" />
         )}
+        {hasError && (
+          <div className="holidays-box__image-fallback">
+            <IoImageOutline className="holidays-box__fallback-icon" />
+            <span className="holidays-box__fallback-text">{place.placeName}</span>
+          </div>
+        )}
+        <img
+          ref={handleImgRef}
+          src={place.placeImage}
+          alt={place.placeName}
+          loading="eager"
+          decoding="async"
+          className={`holidays-box__img ${imageLoaded && !hasError ? "holidays-box__img--loaded" : "holidays-box__img--loading"}`}
+          onLoad={handleLoad}
+          onError={handleError}
+          style={{ display: hasError ? "none" : undefined }}
+        />
       </div>
 
       <div className="holidays-box__info">
